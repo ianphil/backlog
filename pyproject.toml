@@ -11,6 +11,3 @@ dependencies = [
 
 [project.scripts]
 backlog = "backlog.cli:cli"
-
-[tool.uv]
-virtualenvs.in-project = true  # Optional: keeps .venv inside your repo
