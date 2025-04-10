@@ -1,0 +1,16 @@
+[project]
+name = "backlog"
+version = "0.1.0"
+description = "AI-driven CLI task backlog manager"
+authors = [{ name = "Ian", email = "ian.philpot@microsoft.com" }]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "click>=8.1.8",
+]
+
+[project.scripts]
+backlog = "backlog.cli:cli"
+
+[tool.uv]
+virtualenvs.in-project = true  # Optional: keeps .venv inside your repo

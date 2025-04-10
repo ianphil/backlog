@@ -1,0 +1,57 @@
+name: Build & Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"  # Example: v0.1.0
+
+# git tag v0.1.0
+# git push origin v0.1.0
+
+jobs:
+  build-and-release:
+    name: Build and release Backlog
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write  # Needed to create GitHub releases
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 🧪 Install uv
+        uses: yezz123/setup-uv@v4
+
+      - name: 🔧 Install project
+        run: |
+          uv pip install --editable .
+          uv pip install build
+
+      - name: 🧪 Run tests
+        run: |
+          # Optional: skip or write tests later
+          echo "No tests yet"
+
+      - name: 📦 Build package
+        run: python -m build
+
+      - name: 🏷 Get version from pyproject.toml
+        id: get_version
+        run: |
+          VERSION=$(grep -E '^version' pyproject.toml | head -1 | cut -d'"' -f2)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: 🚀 Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: "Release ${{ steps.get_version.outputs.version }}"
+          files: |
+            dist/*.whl
+            dist/*.tar.gz
