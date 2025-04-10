@@ -41,8 +41,9 @@ backlog/
 
 ### 📌 Notes
 
-- **`scripts/cli.py`** is the main entry point. You can symlink this for easier usage (`backlog` command).
+- **`backlog/cli.py`** is the main entry point. You can symlink this for easier usage (`backlog` command).
 - **`core/`** = all logic that doesn’t require AI. This is your foundation and runs even if OpenAI goes down.
 - **`ai/`** = all model-specific logic. Easy to mock or switch to other LLMs later.
 - **`tasks/`** = markdown export for human-readable editing and doc gen.
+- **`tests/`** = contains unit and integration tests to ensure the reliability of core and AI features.
 - **`.env`** for dev/test, pulled in with `python-dotenv` or `os.environ`.
