@@ -7,10 +7,8 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "click>=8.1.8",
+    "pytest>=8.3.5",
 ]
 
 [project.scripts]
 backlog = "backlog.cli:cli"
-
-[tool.uv]
-virtualenvs.in-project = true  # Optional: keeps .venv inside your repo
