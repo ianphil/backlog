@@ -33,3 +33,8 @@ cd backlog
 uv pip install -e .
 backlog task add --title "Fix import bug" --description "Adjust relative paths" --priority medium
 ```
+
+### Tests
+```bash
+pytest tests/
+```
