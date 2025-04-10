@@ -15,10 +15,10 @@
 ## Install locally
 ```bash
 # Install from github releases (BE SURE TO CHANGE THE VERSION!)
-uv pip install git+https://github.com/<your-username>/backlog.git@v0.1.0
+pip install git+https://github.com/ianphil/backlog.git@v0.1.0
 
 # Uninstall
-uv pip uninstall backlog
+pip uninstall backlog
 ```
 
 ---
