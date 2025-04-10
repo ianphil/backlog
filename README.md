@@ -25,3 +25,11 @@
 ```bash
 git clone https://github.com/your-username/backlog.git
 cd backlog
+```
+
+### Run locally
+
+```bash
+uv pip install -e .
+backlog task add --title "Fix import bug" --description "Adjust relative paths" --priority medium
+```
