@@ -43,8 +43,10 @@ jobs:
           pytest
 
       - name: 📦 Build package
-        run: python -m build
-
+        run: |
+          source .venv/bin/activate
+          python -m build
+        
       - name: 🏷 Get version from pyproject.toml
         id: get_version
         run: |
