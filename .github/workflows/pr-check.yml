@@ -24,11 +24,17 @@ jobs:
       - name: 🧪 Install uv
         uses: yezz123/setup-uv@v4
 
+      - name: 🧱 Create virtual environment
+        run: uv venv
+
       - name: 🛠 Install project
         run: |
+          source .venv/bin/activate
           uv pip install --editable .
           uv pip install build
 
       - name: 🧪 Run tests
         run: |
-          echo "🧪 No tests yet, just a dry run"
+          source .venv/bin/activate
+          pytest
+
