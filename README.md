@@ -13,6 +13,29 @@
 
 ---
 
+## 📋 Available Commands
+
+### Task Management
+
+```bash
+# Add a new task to your backlog
+backlog task add --title "Fix import bug" --description "Adjust relative paths" --priority medium
+
+# List all tasks in your backlog
+backlog task list
+
+# Filter tasks by status
+backlog task list --status pending
+
+# Filter tasks by priority
+backlog task list --priority high
+
+# Filter by both status and priority
+backlog task list --status pending --priority high
+```
+
+---
+
 ## 🛠 Dev Environment Setup
 
 ### Prerequisites
@@ -31,10 +54,9 @@ cd backlog
 
 ```bash
 uv pip install -e .
-backlog task add --title "Fix import bug" --description "Adjust relative paths" --priority medium
 ```
 
-### Tests
+## 🧪 Tests
 ```bash
 pytest tests/
 ```

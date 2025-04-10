@@ -1,7 +1,7 @@
 import click
 from backlog.core.markdown import write_markdown_file
 from backlog.core.storage import load_tasks, save_tasks
-from backlog.core.task_ops import add_task
+from backlog.core.task_ops import add_task, filter_tasks
 
 @click.group()
 def cli():
@@ -33,3 +33,45 @@ def add(title, description, priority):
 
     click.echo(f"✅ Task [{task.id}] added: {task.title}")
     click.echo(f"📄 Markdown: {md_path}")
+
+@task.command("list")
+@click.option("--status", type=click.Choice(["pending", "done", "deferred"]), 
+              help="Filter tasks by status")
+@click.option("--priority", type=click.Choice(["low", "medium", "high"]), 
+              help="Filter tasks by priority")
+def list_tasks(status, priority):
+    """List tasks in your backlog with optional filtering"""
+    task_collection = load_tasks()
+    
+    # Apply filters if provided
+    filtered_tasks = filter_tasks(task_collection.tasks, status, priority)
+    
+    if not filtered_tasks:
+        click.echo("📝 No tasks found matching the criteria")
+        return
+    
+    # Display header with filter info
+    filter_info = []
+    if status:
+        filter_info.append(f"status={status}")
+    if priority:
+        filter_info.append(f"priority={priority}")
+    
+    filter_text = f" (filtered by: {', '.join(filter_info)})" if filter_info else ""
+    click.echo(f"📋 Task List{filter_text}:")
+    
+    # Display the tasks in a table-like format
+    for task in filtered_tasks:
+        status_emoji = {
+            "pending": "⏳",
+            "done": "✅",
+            "deferred": "⏱️"
+        }.get(task.status, "⏳")
+        
+        priority_marker = {
+            "high": "🔴",
+            "medium": "🟡",
+            "low": "🔵"
+        }.get(task.priority, "⚪")
+        
+        click.echo(f"{status_emoji} [{task.id}] {priority_marker} {task.title}")
