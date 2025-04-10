@@ -31,7 +31,7 @@ jobs:
       - name: 🧱 Create virtual environment
         run: uv venv
 
-      - name: 🔧 Install project
+      - name: 🛠 Install project
         run: |
           source .venv/bin/activate
           uv pip install --editable .
@@ -39,8 +39,8 @@ jobs:
 
       - name: 🧪 Run tests
         run: |
-          # Optional: skip or write tests later
-          echo "No tests yet"
+          source .venv/bin/activate
+          pytest
 
       - name: 📦 Build package
         run: python -m build
