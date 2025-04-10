@@ -12,6 +12,16 @@
 - Minimal file-based setup – no database required
 
 ---
+## Install locally
+```bash
+# Install from github releases (BE SURE TO CHANGE THE VERSION!)
+uv pip install git+https://github.com/<your-username>/backlog.git@v0.1.0
+
+# Uninstall
+uv pip uninstall backlog
+```
+
+---
 
 ## 📋 Available Commands
 
